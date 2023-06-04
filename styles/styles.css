@@ -109,10 +109,32 @@ h1 {
     height: 120px;
 }
 
-.cars__info__wrapper {
+.cars__wrapper {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
 }
 
+.cars__wrapper h2 {
+    color: #6de229;
+    text-align: center;
+    text-shadow: -1px -1px 0 #000;
+    font-size: 32px;
+}
+
+.cars__wrapper .back__button:active {
+    background-color: rgba(86, 145, 212, 0.5);
+}
+
+.cars__wrapper .back__button {
+    background: url(../images/exitBtn.png) center center no-repeat;
+    background-size: cover;
+    margin: 20px 0 0;
+    width: 300px;
+    height: 220px;
+    border: none;
+    outline: none;
+    border-radius: 20px;
+    transition: all .3s;
+}

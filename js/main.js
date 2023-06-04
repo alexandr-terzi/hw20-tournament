@@ -109,23 +109,6 @@ let raceCars = [
     }
 ];
 
-let carsBrand = raceCars.map(function(obj) {
-    let values = Object.values(obj);
-    return values[0];
-});
-let carsModel = raceCars.map(function(obj) {
-    let values = Object.values(obj);
-    return values[1];
-});
-let carsPower = raceCars.map(function(obj) {
-    let values = Object.values(obj);
-    return values[2];
-});
-let carsPrice = raceCars.map(function(obj) {
-    let values = Object.values(obj);
-    return values[3];
-});
-
 let sliderWrapper = document.querySelector('.slider__wrapper');
 let carsLogo = document.querySelector(".slider__wrapper .cars__logo");
 let startBtn = document.querySelector(".slider__wrapper .buttons .start .startBtn");
@@ -134,71 +117,85 @@ let prev = document.querySelector(".slider__wrapper .buttons .arrows .prev");
 let current_slide = 0;
 let carsInfoWrapper = document.querySelector(".cars__info__wrapper");
 
-function renderSlider() {
-    carsLogo.innerHTML = '';
-
-    for (let i = 0; i < carsBrand.length ; i++) {
-
-        var logo = document.createElement('img');
-        logo.classList.add('logo');
-        logo.setAttribute('src', `images/${carsBrand[i].toLowerCase()}.svg`);
-        logo.setAttribute('alt', `${carsBrand[i].toLowerCase()} logo`);
-        logo.setAttribute('id', `${carsBrand[i].toLowerCase()}`);
-
-        carsLogo.appendChild(logo);
-    }
-    function addCurrent() {
-        return logo.classList.add('current');
-    }
-
-    function removeCurrent() {
-        return logo.classList.remove('current');
-    }
-    
-    document.addEventListener('DOMContentLoaded', addCurrent);
-    next.addEventListener('click', removeCurrent);
-    prev.addEventListener('click', removeCurrent);
-}
 
 renderSlider();
 
-function renderCarInfo() {
-    carsInfoWrapper.innerHTML = '';
+function renderSlider() {
+    carsLogo.innerHTML = '';
 
-    for (let i = 0, j = 0, k = 0, l = 0; i < carsBrand.length, j < carsModel.length, k < carsPower.length, l < carsPrice.length; i++, j++, k++, l++) {
+    for (let i = 0; i < raceCars.length; i++) {
+        const car = raceCars[i];
 
-        var carsWrapper = document.createElement('div');
-        carsWrapper.classList.add('cars__wrapper');
+        var logo = document.createElement('img');
+        logo.classList.add('logo');
+        logo.setAttribute('src', `images/${car.brand.toLowerCase()}.svg`);
+        logo.setAttribute('alt', `${car.brand.toLowerCase()} logo`);
+        logo.setAttribute('id', `${car.brand.toLowerCase()}`);
 
-        
-        var carsTitle = document.createElement('h1');
-        var carsTitleText = document.createTextNode(`${carsBrand[i]} ${carsModel[j]}`);
-        carsTitle.appendChild(carsTitleText);
-
-        var carsImage = document.createElement('img');
-        carsImage.setAttribute('src', `images/cars/${carsBrand[i].toLowerCase()}.png`);
-        carsImage.setAttribute('alt', `${carsBrand[i].toLowerCase()}`);
-        carsImage.setAttribute('id', `${carsBrand[i].toLowerCase()}`);
-
-        var carsInfoPower = document.createElement('h2');
-        var carsInfoTextPower = document.createTextNode(`Power: ${carsPower[k]} HP`);
-        carsInfoPower.appendChild(carsInfoTextPower);
-
-        var carsInfoPrice = document.createElement('h2');
-        var carsInfoTextPrice = document.createTextNode(`Price: ${carsPrice[l]} $`);
-        carsInfoPrice.appendChild(carsInfoTextPrice);
-
-        carsWrapper.appendChild(carsTitle);
-        carsWrapper.appendChild(carsImage);
-        carsWrapper.appendChild(carsInfoPower);
-        carsWrapper.appendChild(carsInfoPrice);
-
-        carsInfoWrapper.appendChild(carsWrapper);
-
+        carsLogo.appendChild(logo);
     }
 
-}
+    function addCurrent() {
+        logo.classList.add('current');
+    }
 
+    function removeCurrent() {
+        logo.classList.remove('current');
+    }
+
+    document.addEventListener('DOMContentLoaded', addCurrent);
+    next.addEventListener('click', removeCurrent);
+    prev.addEventListener('click', removeCurrent);
+
+    function renderCarInfo(car) {
+        var carsWrapper = document.createElement('div');
+    carsWrapper.classList.add('cars__wrapper');
+    
+    var carsTitle = document.createElement('h1');
+    var carsTitleText = document.createTextNode(`${car.brand} ${car.model}`);
+    carsTitle.appendChild(carsTitleText);
+
+    var carsImage = document.createElement('img');
+    carsImage.setAttribute('src', `images/cars/${car.brand.toLowerCase()}.png`);
+    carsImage.setAttribute('alt', `${car.brand.toLowerCase()}`);
+
+    var carsInfoPower = document.createElement('h2');
+    var carsInfoTextPower = document.createTextNode(`Power: ${car.power} HP`);
+    carsInfoPower.appendChild(carsInfoTextPower);
+
+    var carsInfoPrice = document.createElement('h2');
+    var carsInfoTextPrice = document.createTextNode(`Price: ${car.price} $`);
+    carsInfoPrice.appendChild(carsInfoTextPrice);
+
+    var backButton = document.createElement('button');
+    backButton.classList.add('back__button');
+
+    carsWrapper.appendChild(carsTitle);
+    carsWrapper.appendChild(carsImage);
+    carsWrapper.appendChild(carsInfoPower);
+    carsWrapper.appendChild(carsInfoPrice);
+    carsWrapper.appendChild(backButton);
+
+    carsInfoWrapper.appendChild(carsWrapper);
+
+    backButton.addEventListener('click', function() {
+        sliderWrapper.style.display = 'block';
+        carsInfoWrapper.style.display = 'none';
+    });
+    }
+
+    function removeCarInfo() {
+        carsInfoWrapper.innerHTML = '';
+    }
+
+    startBtn.addEventListener('click', function() {
+        sliderWrapper.style.display = 'none';
+        carsInfoWrapper.style.display = 'block';
+        removeCarInfo();
+        renderCarInfo(raceCars[current_slide]);
+    });
+
+}
 
 
 let carsLogoImg = document.querySelectorAll(".slider__wrapper .cars__logo img");
@@ -223,17 +220,3 @@ prev.addEventListener("click", function () {
     carsLogoImg[current_slide].style.opacity = 1;
 });
 
-renderCarInfo()
-
-var carsInfoContainer = document.getElementsByClassName('cars__wrapper');
-var newCarsInfoContainer = Array.from(carsInfoContainer);
-
-// startBtn.addEventListener('click', function () {
-    
-
-//     for (let i = 0; i < newCarsInfoContainer.length; i++) {
-//         if (logo.getAttribute('id') === carsImage.getAttribute('id')) {
-//             return console.log(newCarsInfoContainer);
-//         } else return console.log('')
-//     }
-// })
