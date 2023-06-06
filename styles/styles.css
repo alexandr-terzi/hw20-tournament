@@ -15,12 +15,42 @@ h1 {
     color: #d2e229;
     text-align: center;
     text-shadow: -1px -1px 0 #000;
-    font-size: 40px;
+    font-size: 50px;
+}
+
+h2 {
+    color: #6de229;
+    text-align: center;
+    text-shadow: -1px -1px 0 #000;
+    font-size: 32px;
+}
+
+button {
+    font-family: Dash Horison;
+    font-size: 32px;
+    font-weight: bold;
+    color: rgb(199, 170, 73);
+}
+
+input {
+    border:1px solid #9E9E9E;
+    color: #000000;
+    padding: 3px;
+    margin-top: 2px;
+    margin-bottom: 2px;
+    font-size: 20px;
+    font-family: Dash Horizon;
+    background: rgb(255, 255, 255);
+    width: 100px;
+}
+
+input:hover {
+    background: rgb(206, 206, 206);
 }
 
 .slider__wrapper {
     margin: 0 auto;
-    display: flex;
+    display: none;
     flex-direction: column;
     justify-content: center;
     margin-bottom: 50px;
@@ -93,7 +123,7 @@ h1 {
 }
 
 .slider__wrapper .buttons .start .startBtn {
-    background: url(../images/startBtn.png) center center no-repeat;
+    background: url(../images/checkBtn.png) center center no-repeat;
     background-size: cover;
 }
 
@@ -116,7 +146,7 @@ h1 {
     align-items: center;
 }
 
-.cars__wrapper h2 {
+h2 {
     color: #6de229;
     text-align: center;
     text-shadow: -1px -1px 0 #000;
@@ -137,4 +167,66 @@ h1 {
     outline: none;
     border-radius: 20px;
     transition: all .3s;
+}
+
+.select__page__wrapper {
+    display: none;
+}
+
+.start__page__wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.start__page__wrapper button {
+    margin-top: 40px;
+    width: 150px;
+    height: 120px;
+    background-color: rgb(72, 113, 190);
+    border-radius: 20px;
+    transition: all .3s;
+}
+
+
+.start__page__wrapper button:hover {
+    background: rgba(252, 210, 210, 0);
+	color: #000000;
+	box-shadow: inset 0 0 0 3px #309bd1;
+}
+.start__page__wrapper button:active {
+    background: rgba(0, 197, 247, 0.5);
+}
+
+.select__page__wrapper {
+    margin-top: 40px;
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+}
+
+.select__page__wrapper h2 {
+    margin-bottom: 20px;
+
+}
+
+.select__page__settings {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.user__name {
+    margin-right: 40px;
+}
+.racers__number__container {
+    margin-right: 40px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
