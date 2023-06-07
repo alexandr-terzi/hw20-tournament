@@ -36,12 +36,14 @@ input {
     border:1px solid #9E9E9E;
     color: #000000;
     padding: 3px;
-    margin-top: 2px;
+    margin-top: 10px;
     margin-bottom: 2px;
-    font-size: 20px;
+    font-size: 24px;
     font-family: Dash Horizon;
     background: rgb(255, 255, 255);
     width: 100px;
+    border-radius: 20px;
+    padding-left: 10px;
 }
 
 input:hover {
@@ -153,24 +155,37 @@ h2 {
     font-size: 32px;
 }
 
-.cars__wrapper .back__button:active {
-    background-color: rgba(86, 145, 212, 0.5);
+.btns__cars__container {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
 }
+
 
 .cars__wrapper .back__button {
     background: url(../images/exitBtn.png) center center no-repeat;
     background-size: cover;
-    margin: 20px 0 0;
-    width: 300px;
-    height: 220px;
+}
+.cars__wrapper .start__race__btn {
+    background: url(../images/startBtn.png) center center no-repeat;
+    background-size: cover;
+    transform: scale(0.70);
+}
+
+.cars__wrapper button {
+    width: 250px;
+    height: 200px;
     border: none;
     outline: none;
     border-radius: 20px;
     transition: all .3s;
 }
-
-.select__page__wrapper {
-    display: none;
+.cars__wrapper .back__button:active {
+    background-color: rgba(86, 145, 212, 0.5);
+}
+.cars__wrapper .start__race__btn:active {
+    background-color: rgba(86, 145, 212, 0.5);
 }
 
 .start__page__wrapper {
@@ -178,6 +193,21 @@ h2 {
     flex-direction: column;
     justify-content: center;
     align-items: center;
+}
+
+.start__page__title {
+    margin-bottom: 40px;
+}
+
+.start__page__img__wrapper {
+    width: 600px;
+    height: 400px;
+    border-radius: 20px;
+}
+.start__page__img__wrapper img{
+    width: 100%;
+    height: auto;
+    border-radius: 20px;
 }
 
 .start__page__wrapper button {
@@ -200,7 +230,6 @@ h2 {
 }
 
 .select__page__wrapper {
-    margin-top: 40px;
     display: none;
     flex-direction: column;
     justify-content: center;
@@ -208,8 +237,8 @@ h2 {
 
 }
 
-.select__page__wrapper h2 {
-    margin-bottom: 20px;
+.select__page__wrapper h1 {
+    margin-bottom: 50px;
 
 }
 
@@ -220,13 +249,87 @@ h2 {
     align-items: center;
 }
 
-.user__name {
-    margin-right: 40px;
+.racers__number__container label {
+    display: flex;
+    flex-direction: column;
+    font-size: 28px;
+    color: #00ff74;
 }
+
 .racers__number__container {
     margin-right: 40px;
     display: flex;
     flex-direction: column;
     justify-content: center;
-    align-items: center;
+    align-items: flex-start;
 }
+
+.select__page__wrapper .generate__btn {
+    margin-top: 0;
+    margin-right: 40px;
+}
+
+.user__name {
+    width: 150px;
+}
+
+.racers__list {
+    color: #00ff74;
+    font-size: 30px;
+}
+
+.cars_animation {
+    display: none;
+}
+
+#container {
+    position: relative;
+    width: 1600px;
+    height: 500px;
+    padding-top: 200px;
+  }
+  
+  .image {
+    position: absolute;
+    width: 720px;
+    height: 450px;
+    background-size: cover;
+  }
+  
+  .cars_animation{
+    text-align: center;
+  }
+  
+  .start_anim{
+    width: 300px;
+    height: 80px;
+    border-radius: 5px;
+    border: none;
+    font-size: 20px;
+    cursor: pointer;
+    margin-top: 20px;
+    background-color: rgb(55, 12, 80);
+    color:rgb(240, 240, 116);
+  }
+  
+  .start_anim:hover{
+  width: 20%;
+  color: rgb(54, 131, 175);
+  }
+  
+  .seeTable{
+    width: 300px;
+    height: 80px;
+    border-radius: 5px;
+    border: none;
+    font-size: 20px;
+    cursor: pointer;
+    margin-top: 20px;
+    background-color: rgb(55, 12, 80);
+    color:rgb(240, 240, 116);
+  }
+  
+  .seeTable:hover{
+  width: 20%;
+  color: rgb(54, 131, 175);
+  }
