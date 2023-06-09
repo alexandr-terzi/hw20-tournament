@@ -177,6 +177,9 @@ let carsInfoWrapper = document.querySelector(".cars__info__wrapper");
 let startPageWrapper = document.querySelector(".start__page__wrapper");
 let sliderWrapperTitle = document.querySelector(".slider__wrapper__title");
 let carsAnimation = document.querySelector('.cars_animation');
+let seeTable = document.getElementById('btn_seeTable');
+let resultsTable = document.querySelector('.results__table');
+let winnerPage = document.querySelector('.winner__page');
 
 renderSlider();
 renderStartPage();
@@ -435,9 +438,8 @@ prev.addEventListener("click", function () {
 });
 
 let container = document.getElementById('container');
-let btn = document.getElementById('btn_ride');
 
-btn.addEventListener('click', function() {
+startBtn.addEventListener('click', function() {
   createImage(0); // Start with the first image
 });
 
@@ -455,7 +457,7 @@ function createImage(index) {
     animateImage(image);
 
     createImage(index + 1); // Generate the next image
-  }, 2000); // Delay between each image generation (1000 milliseconds = 1 second)
+  }, 2500); // Delay between each image generation (1000 milliseconds = 1 second)
 }
 
 function createImage1(i) {
@@ -486,4 +488,113 @@ function animateImage(image) {
   window.requestAnimationFrame(step);
 }
 
-const seeTable = document.getElementById('btn_seeTable');
+seeTable.addEventListener('click', function() {
+    carsAnimation.style.display = 'none';
+    resultsTable.style.display = 'flex';
+    racersAndCars.forEach(function(racer) {
+        racer.time = Math.floor(Math.random() * (200 - 120 + 1)) + 120;
+    });
+    renderResultsTable();
+});
+
+function renderResultsTable() {
+    var table = document.createElement("table");
+    table.className = 'table_blur';
+
+// Создание заголовка таблицы
+var thead = document.createElement("thead");
+var headerRow = document.createElement("tr");
+var headers = ["Name", "Car", "Time"];
+
+headers.forEach(function(header) {
+  var th = document.createElement("th");
+  th.textContent = header;
+  headerRow.appendChild(th);
+});
+
+thead.appendChild(headerRow);
+table.appendChild(thead);
+
+// Создание строк с данными участников заезда
+var tbody = document.createElement("tbody");
+
+racersAndCars.forEach(function(racer) {
+  var row = document.createElement("tr");
+
+  var nameCell = document.createElement("td");
+  nameCell.textContent = racer.racer;
+  row.appendChild(nameCell);
+
+  var carCell = document.createElement("td");
+  carCell.textContent = racer.car;
+  row.appendChild(carCell);
+
+  var timeCell = document.createElement("td");
+  timeCell.textContent = racer.time + " sec";
+  row.appendChild(timeCell);
+
+  tbody.appendChild(row);
+});
+
+table.appendChild(tbody);
+
+var winnerBtn = document.createElement('button');
+winnerBtn.className = 'winner__btn';
+
+winnerBtn.textContent = 'Winner';
+
+// Добавление таблицы на страницу
+resultsTable.appendChild(table);
+resultsTable.appendChild(winnerBtn);
+
+
+function renderWinner() {
+    winnerPage.innerHTML = '';
+  
+    var raceWinner = getWinner();
+    var winnerPageTitle = document.createElement('h1');
+    if (raceWinner.racer === racersAndCars[0].racer) {
+        winnerPageTitle.textContent = `${raceWinner.racer}, you are winner! Congratulations! This is a new record: ${raceWinner.time} sec!`;
+    } else winnerPageTitle.textContent = `Today you are not as fast as usual! Click here and try again!`;
+  
+    var winnerCar = document.createElement('div');
+    var winnerCarImg = document.createElement('img');
+    if (raceWinner.racer === racersAndCars[0].racer) {
+        winnerCarImg.src = createImage(raceWinner);
+    } else winnerCarImg.src = `images/sad.png`;
+
+  
+    winnerCar.appendChild(winnerCarImg);
+  
+    winnerPage.appendChild(winnerPageTitle);
+    winnerPage.appendChild(winnerCar);
+  }
+  
+  function getWinner() {
+    var winner = racersAndCars[0]; // Предполагаем, что первый элемент - победитель
+    for (let i = 1; i < racersAndCars.length; i++) {
+      if (racersAndCars[i].time < winner.time) {
+        winner = racersAndCars[i];
+      }
+    }
+    return winner;
+  }
+  
+  function createImage(raceWinner) {
+    const img = `images/cars/${raceWinner.car.split(" ")[0].toLowerCase()}.png`;
+    return img;
+  }
+  
+  winnerBtn.addEventListener('click', function() {
+    renderWinner();
+    resultsTable.style.display = 'none';
+    winnerPage.style.display = 'flex';
+  });
+
+  winnerPage.addEventListener('click', () => window.location.reload());
+  
+
+}
+
+console.log(racersAndCars);
+
